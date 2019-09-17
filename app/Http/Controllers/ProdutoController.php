@@ -38,9 +38,10 @@ class ProdutoController extends Controller
 
     public function edit($codpro)
     {
+        $categoria = \App\Categoria::get();
          $produto = \App\Produto:: find($codpro);  // find = busca no banco de dados e faz o que se pede
          
-         return view('produto.edit', compact('produto')); // COMPACT passa as variaveis para a view.
+         return view('produto.edit', compact('produto','categoria')); // COMPACT passa as variaveis para a view.
     }
     
     public function update(Request $request, $codpro)
