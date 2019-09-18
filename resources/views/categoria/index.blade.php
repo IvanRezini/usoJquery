@@ -27,7 +27,7 @@
                     success: function (data) {
                         //Açao de sucessso
                         if(data == 'true'){
-                        alert('Categoria eliminada!!');
+                        $('#linha'+idForm).remove();
                     }
                     else{
                         alert('Nao foi posivel eliminar a categoria');
@@ -58,7 +58,7 @@
                 </thead>
                 <tbody>
                     @foreach ($categorias as $c)
-                    <tr style="background: #9ba2ab">
+                    <tr style="background: #9ba2ab" id="linhadel{{$c->codcat}}">
                         <td>{{$c->codcat}}</td>
                         <td>{{$c->nomcat}}</td>
                         <td>
