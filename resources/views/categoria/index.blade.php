@@ -9,51 +9,76 @@
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
-        <script>
-            window.onload = function (){
-            @if (session()->get('msg'))
-                    alert('{{session()->get('msg')}}');
-            @endif
-            };
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
         </script>
 
     </head>
     <body>
+        <script>
+            function eliminarCategoria(idForm, destino){
+                
+                dadosForm = $('#'+idForm).serialize();
+                $.ajax({
+                    method: 'post',
+                    url: destino,
+                    data: dadosForm,
+                    dataType: 'html',
+                    success: function (data) {
+                        //Açao de sucessso
+                        if(data == 'true'){
+                        alert('Categoria eliminada!!');
+                    }
+                    else{
+                        alert('Nao foi posivel eliminar a categoria');
+                    }
+                        
+                    },
+                    error: function (argument) {
+                        //Açaõ de erro
+                        alert('Erro ao eliminar a categoria');
+                    }
+                });
+                return false;
+                
+            }
+        </script>
+        
         <br/><a href="{{ url('/') }}">Página Inicial</a><br/><br/>
         </br></br><a href="{{route('categoria.create')}}">Adicionar Categoria</a></br></br>
         <div style="text-align: center">
-        <!-- Listagem de categorias -->   
-        <table style="width: 40%;">
-            <thead>
-                <tr style="background: #BEE9EA">
-                    <td>Cód.</td>
-                    <td>Nome</td>
-                    <td>Ação</td>
-                </tr> 
-            </thead>
-            <tbody>
-                @foreach ($categorias as $c)
-                <tr style="background: #9ba2ab">
-                    <td>{{$c->codcat}}</td>
-                    <td>{{$c->nomcat}}</td>
-                    <td>
-                        <button onclick="location.href ='{{route('categoria.edit', $c->codcat)}}'" style="font-size: 80%; width: 60%;" type="button">Editar</button></br>
+            <!-- Listagem de categorias -->   
+            <table style="width: 40%;">
+                <thead>
+                    <tr style="background: #BEE9EA">
+                        <td>Cód.</td>
+                        <td>Nome</td>
+                        <td>Ação</td>
+                    </tr> 
+                </thead>
+                <tbody>
+                    @foreach ($categorias as $c)
+                    <tr style="background: #9ba2ab">
+                        <td>{{$c->codcat}}</td>
+                        <td>{{$c->nomcat}}</td>
+                        <td>
+                            <button onclick="location.href ='{{route('categoria.edit', $c->codcat)}}'" style="font-size: 80%; width: 60%;" type="button">Editar</button></br>
 
-                        <form action="{{route('categoria.destroy', $c->codcat)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" style="font-size: 80%; width: 60%;">Excluir</button>
+                            <form onsubmit="return eliminarCategoria('del{{$c->codcat}}', '{{route('categoria.destroy', $c->codcat)}}');" id="del{{$c->codcat}}" action="{{route('categoria.destroy', $c->codcat)}}" method="post">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" style="font-size: 80%; width: 60%;">Excluir</button>
 
-                        </form>
-                    </td> 
-                </tr>
-                 
-                @endforeach
-            </tbody>
-        
-    </table>
-       </div>
-  </body>
+                            </form>
+                        </td> 
+                    </tr>
+
+                    @endforeach
+                </tbody>
+
+            </table>
+        </div>
+    </body>
 
 </html>
 
