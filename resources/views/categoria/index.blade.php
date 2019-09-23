@@ -12,39 +12,18 @@
         <script
             src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous">
         </script>
+        <script src="{{url('/')}}/js/categoria.js" type="text/javascript"></script> 
+
 
     </head>
     <body>
-        <script>
-            function eliminarCategoria(idForm, destino){
-                
-                dadosForm = $('#'+idForm).serialize();
-                $.ajax({
-                    method: 'post',
-                    url: destino,
-                    data: dadosForm,
-                    dataType: 'html',
-                    success: function (data) {
-                        //Açao de sucessso
-                        if(data == 'true'){
-                        $('#linha'+idForm).remove();
-                    }
-                    else{
-                        alert('Nao foi posivel eliminar a categoria');
-                    }
-                        
-                    },
-                    error: function (argument) {
-                        //Açaõ de erro
-                        alert('Erro ao eliminar a categoria');
-                    }
-                });
-                return false;
-                
-            }
-        </script>
-        
+      
+
         <br/><a href="{{ url('/') }}">Página Inicial</a><br/><br/>
+
+        <button onclick="mostraEsconderTitulo();">Montrar/Esconder  Título</button>
+        <br/><br/>
+        <h1 id="titulo" hidden>Listagem de categoria</h1>
         </br></br><a href="{{route('categoria.create')}}">Adicionar Categoria</a></br></br>
         <div style="text-align: center">
             <!-- Listagem de categorias -->   
