@@ -34,25 +34,37 @@ function mostraEsconderTitulo() {
 function adicionarCategoria(destino) {
 
     dadosForm = $('#formAdd').serialize();
-    $.ajax({
-        method: 'post',
-        url: destino,
-        data: dadosForm,
-        dataType: 'html',
-        success: function (data) {
-            if (data == "true") {
-                alert('Categoria adicionada com sucasso!');
-                history.back();
-            } else {
-                alert('falha ao adicionar categoria');
-            }
-        },
-        error: function (argument) {
-            //Açaõ de erro
-            alert('Erro ao eliminar a categoria');
-        }
-    });
+    nomcat = $('#nomcat').val();
 
+    if (nomcat.trim() != "") {
+        $.ajax({
+            method: 'post',
+            url: destino,
+            data: dadosForm,
+            dataType: 'html',
+            success: function (data) {
+                if (data == "true") {
+                    $('#retorno').val('Categoria adicionada com sucasso!');
+                    // history.back();
+
+                    //redireciona usuario
+                    //location.href='/categoria';
+                    //
+                    //Limpa o campo e retorna ao campode adicionar categoria
+                    $('#nomcat').val('');
+                    $('#nomcat').focus();
+                } else {
+                    $('#retorno').val('falha ao adicionar categoria');
+                }
+            },
+            error: function (argument) {
+                //Açaõ de erro
+                alert('Erro ao eliminar a categoria');
+            }
+        });
+    }else{
+        alert("Preecha todos os campos!");
+    }
     return false;
 }
 
