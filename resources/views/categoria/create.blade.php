@@ -24,10 +24,10 @@
 
             <label for='nomcat'>Nome da categoria</label><br/>
             <input placeholder="digite..." type="text" name="nomcat" id="nomcat"/><br/><br/>
-            <button type="submit"style="width: 50%;padding: 10px; display: table; margin: auto">Salvar</button>
-
+            <button type="submit"style="width: 50%;padding: 10px; display: table; margin: auto">Salvar</button><br/><br/>
+            <h2 id="retorno" name="retorno" >"hh"</h2>
         </form>
-        <h2 id="retorno" name="retorno" >"hh"</h2>
+
     </body>
 </html>
 

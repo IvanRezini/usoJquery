@@ -44,7 +44,7 @@ function adicionarCategoria(destino) {
             dataType: 'html',
             success: function (data) {
                 if (data == "true") {
-                    $('#retorno').val('Categoria adicionada com sucasso!');
+                    $('#retorno').html('Categoria adicionada com sucasso!');
                     // history.back();
 
                     //redireciona usuario
@@ -54,16 +54,16 @@ function adicionarCategoria(destino) {
                     $('#nomcat').val('');
                     $('#nomcat').focus();
                 } else {
-                    $('#retorno').val('falha ao adicionar categoria');
+                    $('#retorno').html('falha ao adicionar categoria');
                 }
             },
             error: function (argument) {
                 //Açaõ de erro
-                alert('Erro ao eliminar a categoria');
+                $('#retorno').html('Erro ao cadastrar categoria');
             }
         });
     }else{
-        alert("Preecha todos os campos!");
+        $('#retorno').html("Preecha todos os campos!");
     }
     return false;
 }
