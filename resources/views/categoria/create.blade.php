@@ -19,7 +19,7 @@
         <br/><a href="{{ url('/') }}">Página Inicial</a><br/><br/>
         <h3 style="width: 0%;padding: 10px; display: table; margin: auto">Cadastrar Categoria</h3>
 
-        <form id="formAdd" onsubmit="adicionarCategoria('{{route('categoria.store')}}');" action="" method="post"style="width: 0%;padding: 10px; display: table; margin: auto">
+        <form id="formAdd" onsubmit="return adicionarCategoria('{{route('categoria.store')}}');" action="" method="post"style="width: 0%;padding: 10px; display: table; margin: auto">
             @csrf <!--para evitar envio de formularios atraves de outras pessoas ao site-->
 
             <label for='nomcat'>Nome da categoria</label><br/>
