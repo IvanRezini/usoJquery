@@ -35,7 +35,8 @@ function adicionarCategoria(destino) {
 
     dadosForm = $('#formAdd').serialize();
     nomcat = $('#nomcat').val();
-
+    //Trava o botao adicionar
+    $('#btnSalvar').attr('disabled', 'true');
     if (nomcat.trim() != "") {
         $.ajax({
             method: 'post',
@@ -44,27 +45,69 @@ function adicionarCategoria(destino) {
             dataType: 'html',
             success: function (data) {
                 if (data == "true") {
-                    $('#retorno').html('Categoria adicionada com sucasso!');
-                    // history.back();
+                    msg = 'Categoria adicionada com sucesso!';
+                    $('#retorno').hide();
+                    $('#retorno').html("<h4 class ='sucesso'>" + msg + "</h4>");
+                    $('#retorno').fadeIn(800);
 
+                    // history.back();
                     //redireciona usuario
                     //location.href='/categoria';
                     //
                     //Limpa o campo e retorna ao campode adicionar categoria
                     $('#nomcat').val('');
                     $('#nomcat').focus();
+                    //Destrava o botao
+                    $('#btnSalvar').removeAttr('disabled');
                 } else {
-                    $('#retorno').html('falha ao adicionar categoria');
+                    $('#nomcat').val('');
+                    msg = 'falha ao adicionar categoria!';
+                    $('#retorno').hide();
+                    $('#retorno').html("<h4 class ='erro'>" + msg + "</h4>");
+                    $('#retorno').fadeIn(800);
+                    $('#btnSalvar').removeAttr('disabled');
+
                 }
             },
             error: function (argument) {
                 //Açaõ de erro
-                $('#retorno').html('Erro ao cadastrar categoria');
+                $('#nomcat').val('');
+                msg = 'Erro ao cadastrar categoria!';
+                $('#retorno').hide();
+                $('#retorno').html("<h4 class ='erro'>" + msg + "</h4>");
+                $('#retorno').fadeIn(800);
+                $('#btnSalvar').removeAttr('disabled');
             }
         });
-    }else{
-        $('#retorno').html("Preecha todos os campos!");
+    } else {
+        $('#nomcat').val('');
+        msg = 'Preecha todos os campos!';
+        $('#retorno').hide();
+        $('#retorno').html("<h4 class ='erro'>" + msg + "</h4>");
+        $('#retorno').fadeIn(800);
+        $('#btnSalvar').removeAttr('disabled');
     }
     return false;
 }
-
+function editarCategoria(destino){
+      dadosForm = $('#formEdit').serialize();
+       confirma = confirm("Deseja editar esta categoria?");
+       if(confirma){
+        $.ajax({
+            method: 'post',
+            url: destino,
+            data: dadosForm,
+            dataType: 'html',
+           success: function (data) {
+                //Açao de sucessso
+                if (data == 'true') {
+                    alert('alterada com socesso');
+                } else {
+                    alert('Nao foi posivel editar a categoria');
+                }}
+          });
+    
+    }
+      
+           return false;
+}
