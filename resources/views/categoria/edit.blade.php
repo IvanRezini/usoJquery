@@ -22,7 +22,7 @@
 
         <h3 style="width: 0%;padding: 10px; display: table; margin: auto">Atualizar Categoria: {{$categoria->nomcat}}</h3>
 
-        <form id="formEdit" onsubmit="return editarCategoria('{{route('categoria.update')}}')" action="" method="post" style="width: 0%;padding: 10px; display: table; margin: auto">
+        <form id="formEdit" onsubmit= " return editarCategoria('{{route('categoria.update', $categoria->codcat)}}')" action="" method="post" style="width: 0%;padding: 10px; display: table; margin: auto">
             @csrf <!--para evitar envio de formularios atraves de outras pessoas ao site-->
             @method('patch')
 

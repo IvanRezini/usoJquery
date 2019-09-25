@@ -89,25 +89,39 @@ function adicionarCategoria(destino) {
     }
     return false;
 }
-function editarCategoria(destino){
-      dadosForm = $('#formEdit').serialize();
-       confirma = confirm("Deseja editar esta categoria?");
-       if(confirma){
+function editarCategoria(destino) {
+    dadosForm = $('#formEdit').serialize();
+    confirma = confirm("Deseja editar esta categoria?");
+    if (confirma) {
         $.ajax({
             method: 'post',
             url: destino,
             data: dadosForm,
             dataType: 'html',
-           success: function (data) {
+            success: function (data) {
                 //Açao de sucessso
                 if (data == 'true') {
-                    alert('alterada com socesso');
+                    msg = 'Categoria editada com sucesso!';
+                    $('#retorno').hide();
+                    $('#retorno').html("<h4 class ='sucesso'>" + msg + "</h4>");
+                    $('#retorno').fadeIn(800);
                 } else {
-                    alert('Nao foi posivel editar a categoria');
-                }}
-          });
-    
+                    msg = 'Erro ao editar!';
+                    $('#retorno').hide();
+                    $('#retorno').html("<h4 class ='erro'>" + msg + "</h4>");
+                    $('#retorno').fadeIn(800);
+                }
+            },
+             error: function (argument) {
+                //Açaõ de erro
+                $('#nomcat').val('');
+                msg = 'Erro ao editar!!';
+                $('#retorno').hide();
+                $('#retorno').html("<h4 class ='erro'>" + msg + "</h4>");
+                $('#retorno').fadeIn(800)}
+        });
+
     }
-      
-           return false;
+
+    return false;
 }
