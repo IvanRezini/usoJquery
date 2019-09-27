@@ -105,6 +105,7 @@ function editarCategoria(destino) {
                     $('#retorno').hide();
                     $('#retorno').html("<h4 class ='sucesso'>" + msg + "</h4>");
                     $('#retorno').fadeIn(800);
+                    $('#nomcat').val('');
                 } else {
                     msg = 'Erro ao editar!';
                     $('#retorno').hide();
